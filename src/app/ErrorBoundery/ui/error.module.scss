@@ -1,0 +1,47 @@
+.error {
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: var(--color-bg);
+    padding: 5px 25px;
+  }
+
+  &--title {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  &--subtitle {
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+
+  &--button-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  &--button {
+    cursor: pointer;
+    color: #090909;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    width: fit-content;
+    border-radius: 0.5em;
+    background: #e8e8e8;
+    border: 1px solid #e8e8e8;
+    transition: all 0.3s;
+    box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+
+    &:hover {
+      border: 1px solid white;
+    }
+
+    &:active {
+      box-shadow: 4px 4px 12px #c5c5c5, -4px -4px 12px #ffffff;
+    }
+  }
+}

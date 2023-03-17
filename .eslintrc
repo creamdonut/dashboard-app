@@ -1,0 +1,76 @@
+{
+  "plugins": ["react-hooks", "@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 10,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    }
+  },
+  "ignorePatterns": ["scripts/**/*", "webpack/**/*"],
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": true,
+    "jest": true
+  },
+  "rules": {
+    "@typescript-eslint/indent": "off",
+    "import/no-unused-modules": "warn",
+    "no-unused-vars": "off",
+    "react/prop-types": "off",
+    "import/no-unresolved": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react/display-name": "off",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "newline-before-return": "error",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/unified-signatures": "error",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/prefer-interface": "off",
+    "@typescript-eslint/ban-ts-ignore": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-misused-new": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "printWidth": 80,
+        "tabWidth": 2,
+        "semi": true,
+        "singleQuote": true,
+        "endOfLine": "auto",
+        "arrowParens": "always",
+        "jsxSingleQuote": true
+      }
+    ]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+  "globals": {
+    "jest": true,
+    "it": true,
+    "expect": true,
+    "shallow": true
+  }
+}

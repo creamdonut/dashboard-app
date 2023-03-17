@@ -1,0 +1,86 @@
+@import 'shared/styles/colors';
+
+.topBlock {
+  padding: 20px;
+  border-radius: 20px;
+  background-color: #fff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+h1 {
+  padding: 0;
+  margin: 0;
+  font-weight: 700;
+  color: #757575;
+}
+
+.title {
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+button {
+  font-size: 3vmin;
+  padding: 0.2em 0.5em;
+  background: #fff;
+  color: #4a5568;
+  border: 1px solid #a0aec0;
+  margin: 0.1em;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease,
+    transform 0.2s ease;
+  // box-shadow: 0 0 0 #bee3f8;
+  transform: translateY(0);
+  &:first-of-type {
+    border-radius: 0.5em 0 0 0.5em;
+  }
+  &:last-of-type {
+    border-radius: 0 0.5em 0.5em 0;
+  }
+  i {
+    color: #a0aec0;
+    margin-right: 0.3em;
+    transition: all 0.2s ease-out;
+  }
+}
+.multiButton {
+  &:hover {
+    button {
+      color: #a0aec0;
+      &:hover {
+        background: $accent-dark;
+        color: #fff;
+        box-shadow: 0 0 0.8em 0 $accent-hover-dark;
+        transform: translateY(-0.2em);
+      }
+    }
+  }
+}
+
+.multiButtonActive {
+  color: #a0aec0;
+  background: $accent-dark;
+  color: #fff;
+  box-shadow: 0 0 0.8em 0 $accent-hover-dark;
+  transform: translateY(-0.2em);
+}
+
+.chart {
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  width: calc(100% - 60px);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}

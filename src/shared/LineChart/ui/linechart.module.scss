@@ -1,0 +1,37 @@
+@import 'shared/styles/colors';
+
+.linechart {
+  padding: 8px;
+}
+.linechartPath {
+  stroke-width: 3;
+  fill: none;
+  cursor: none;
+}
+
+.linechartAxis {
+  stroke: #bdc3c7;
+}
+
+.linechartPoint {
+  fill: #fff;
+  stroke-width: 2;
+}
+
+.linechartArea {
+  padding: 8px;
+  fill: $accent-light;
+  stroke: none;
+  opacity: 0.4;
+}
+
+.linechartLabel {
+  fill: $accent-light;
+  font-weight: 700;
+  padding: 20px;
+}
+
+.hoverLine {
+  stroke: #7d95b6;
+  stroke-width: 1;
+}
