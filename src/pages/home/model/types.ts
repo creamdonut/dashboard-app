@@ -8,10 +8,10 @@ export type HomePageModelState = {
 };
 
 export enum PickerTypeEnum {
-  Hour = 'hour',
   Day = 'day',
   Week = 'week',
   Month = 'month',
+  Year = 'year',
 }
 
 export enum State {
@@ -23,6 +23,12 @@ export enum State {
 
 export type StateData = {
   loading: boolean;
+  data: Point[];
   error?: Error;
-  data?: Point[];
+};
+
+export type Labels = {
+  min: string;
+  center: string;
+  max: string;
 };

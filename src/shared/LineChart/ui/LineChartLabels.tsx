@@ -1,14 +1,16 @@
-import { Point } from 'entities/Point';
 import styles from './linechart.module.scss';
-import { useLineChartLabels } from '../model/useLineChartLabels';
 
 type Props = {
   yLabelSize: number;
   xLabelSize: number;
   svgWidth: number;
   svgHeight: number;
-  fetchedData: Point[];
-  dateFormat?: string;
+  yMaxLabel?: string;
+  yCenteredLabel?: string;
+  yMinLabel?: string;
+  xMaxLabel?: string;
+  xCenteredLabel?: string;
+  xMinLabel?: string;
 };
 
 export const LineChartLabels = ({
@@ -16,19 +18,18 @@ export const LineChartLabels = ({
   xLabelSize,
   svgWidth,
   svgHeight,
-  fetchedData,
-  dateFormat = 'DD/MM/YYYY',
+  yMaxLabel,
+  yCenteredLabel,
+  yMinLabel,
+  xMaxLabel,
+  xCenteredLabel,
+  xMinLabel,
 }: Props) => {
-  const { startDate, endDate, min, max } = useLineChartLabels(
-    fetchedData,
-    dateFormat
-  );
-
   return (
     <g className={styles.linechartLabel}>
       {/* axis y labels */}
       <text x={yLabelSize / 2} y={20} textAnchor='middle'>
-        ${max.toFixed(4)}
+        {yMaxLabel}
       </text>
 
       <text
@@ -38,14 +39,14 @@ export const LineChartLabels = ({
         transform={`translate(-90,${svgHeight / 2 + 20}) rotate(-90)`}
         // transform={`translate(-90px ${svgHeight / 2}) rotate(-90)`}
       >
-        price
+        {yCenteredLabel}
       </text>
       <text x={yLabelSize / 2} y={svgHeight - xLabelSize} textAnchor='middle'>
-        ${min.toFixed(4)}
+        {yMinLabel}
       </text>
       {/* axis x labels */}
       <text x={yLabelSize} y={svgHeight} textAnchor='start'>
-        {startDate}
+        {xMinLabel}
       </text>
       <text
         x={yLabelSize}
@@ -53,10 +54,10 @@ export const LineChartLabels = ({
         textAnchor='start'
         transform={`translate(${svgWidth / 2},0)`}
       >
-        time
+        {xCenteredLabel}
       </text>
       <text x={svgWidth} y={svgHeight} textAnchor='end'>
-        {endDate}
+        {xMaxLabel}
       </text>
     </g>
   );

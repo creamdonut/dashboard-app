@@ -25,8 +25,7 @@ export const useTooltipModel = (
   };
 
   const dateTime =
-    activePoint.timestamp &&
-    dayjs(activePoint.timestamp * 1000).format(dateFormat);
+    activePoint.timestamp && dayjs(activePoint.timestamp).format(dateFormat);
 
   const price = activePoint.price && `Price: $${activePoint.price.toFixed(4)}`;
 

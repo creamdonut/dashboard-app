@@ -7,7 +7,7 @@ export const makeRequest = async <R>(
   try {
     return (
       await axios.request<R>({
-        baseURL: 'https://price-api.crypto.com/price/v2',
+        baseURL: process.env.REACT_APP_BASE_BACKEND,
         ...config,
       })
     ).data;

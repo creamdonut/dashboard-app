@@ -31,9 +31,11 @@ export const useLineChartModel = (
     e: React.MouseEvent<SVGSVGElement, MouseEvent>
   ) => {
     if (!lineChartRef.current) return;
-
     const svgLocation = lineChartRef.current.getBoundingClientRect();
-    const relativeLoc = e.clientX - svgLocation.left;
+
+    const adjustment = svgLocation.width - svgWidth;
+
+    const relativeLoc = e.clientX - svgLocation.left - adjustment;
 
     const svgData: ActivePoint[] = fetchedData.map((point) => ({
       svgX: getSvgX(point.xCoordinate, yLabelSize, svgWidth, fetchedData),

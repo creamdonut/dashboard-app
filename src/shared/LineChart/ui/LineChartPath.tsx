@@ -1,7 +1,7 @@
+import { FIRST_ELEMENT } from 'entities/consts';
 import { Point } from 'entities/Point';
 import { getSvgX } from '../lib/getSvgX';
 import { getSvgY } from '../lib/getSvgY';
-import { FIRST_ELEMENT } from '../model/consts';
 import styles from './linechart.module.scss';
 
 interface Props {

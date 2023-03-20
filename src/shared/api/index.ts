@@ -1,55 +1,40 @@
 import { makeRequest } from './makeRequest';
 
-export interface ApiResponse {
-  price_change: number;
-  prices: number[][];
-  usd_price_change: number;
+export interface ResponseItem {
+  timestamp: number;
+  price: number;
+  xCoordinate: number;
+  yCoordinate: number;
 }
 
-export const getHourStatistics = async () => {
-  try {
-    const response = await makeRequest<ApiResponse>({
-      url: 'h/toncoin',
-    });
-
-    return response;
-  } catch (error) {
-    return null;
-  }
-};
-
 export const getDayStatistics = async () => {
-  try {
-    const response = await makeRequest<ApiResponse>({
-      url: 'd/toncoin',
-    });
+  const response = await makeRequest<ResponseItem[]>({
+    url: 'day',
+  });
 
-    return response;
-  } catch (error) {
-    return null;
-  }
+  return response;
 };
 
 export const getWeekStatistics = async () => {
-  try {
-    const response = await makeRequest<ApiResponse>({
-      url: 'w/toncoin',
-    });
+  const response = await makeRequest<ResponseItem[]>({
+    url: 'week',
+  });
 
-    return response;
-  } catch (error) {
-    return null;
-  }
+  return response;
 };
 
 export const getMonthStatistics = async () => {
-  try {
-    const response = await makeRequest<ApiResponse>({
-      url: 'm/toncoin',
-    });
+  const response = await makeRequest<ResponseItem[]>({
+    url: 'month',
+  });
 
-    return response;
-  } catch (error) {
-    return null;
-  }
+  return response;
+};
+
+export const getYearStatistics = async () => {
+  const response = await makeRequest<ResponseItem[]>({
+    url: 'year',
+  });
+
+  return response;
 };

@@ -14,7 +14,7 @@ export const LineChartLine = ({
   <line
     className={styles.hoverLine}
     x1={hoverLocation}
-    y1={-8}
+    y1={0}
     x2={hoverLocation}
     y2={svgHeight - xLabelSize}
   />
