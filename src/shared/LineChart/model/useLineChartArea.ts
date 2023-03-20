@@ -1,9 +1,9 @@
+import { FIRST_ELEMENT } from 'entities/consts';
 import { Point } from 'entities/Point';
 import { getSvgX } from '../lib/getSvgX';
 import { getSvgY } from '../lib/getSvgY';
 import { getX } from '../lib/getX';
 import { getY } from '../lib/getY';
-import { FIRST_ELEMENT } from './consts';
 
 export const useLineChartArea = (
   yLabelSize: number,

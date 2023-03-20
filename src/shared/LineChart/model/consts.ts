@@ -1,4 +1,3 @@
-export const FIRST_ELEMENT = 0;
 export const DEFAULT_SVG_HEIGHT = 300;
 export const DEFAULT_SVG_WIDTH = 900;
 export const DEFAULT_X_LABEL_SIZE = 20;

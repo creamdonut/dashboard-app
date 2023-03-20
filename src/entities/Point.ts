@@ -1,6 +1,3 @@
-export interface Point {
-  xCoordinate: number;
-  yCoordinate: number;
-  timestamp?: number;
-  price?: number;
-}
+import { ResponseItem } from 'shared/api';
+
+export type Point = ResponseItem;

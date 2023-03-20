@@ -2,24 +2,33 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { ActivePoint } from 'entities/ActivePoint';
 import {
   getDayStatistics,
-  getHourStatistics,
+  getYearStatistics,
   getMonthStatistics,
   getWeekStatistics,
 } from 'shared/api';
 import { useWindowSize } from 'shared/customHooks/useWindowSize';
-import { responseAdapter } from '../lib/responseAdapter';
 import { PickerTypeEnum, State, StateData } from './types';
+
+import { xLabelsAdapter, yLabelsAdapter } from '../lib/labelsAdapter';
+
+type Labels = {
+  min: string;
+  center: string;
+  max: string;
+};
 
 export const useHomePageModel = () => {
   const [currentState, setCurrentState] = useState<State>(State.Idle);
   const [stateData, setStateData] = useState<StateData>({
     loading: false,
+    data: [],
   });
-
   const [hoverLocation, setHoverLocation] = useState<number | null>(null);
   const [activePoint, setActivePoint] = useState<ActivePoint | null>(null);
-
   const [pickerType, setPickerType] = useState<PickerTypeEnum | null>(null);
+
+  const [xLabels, setXLabels] = useState<Labels | null>(null);
+  const [yLabels, setYLabels] = useState<Labels | null>(null);
 
   const lineChartRef = useRef<SVGSVGElement>(null);
 
@@ -28,10 +37,6 @@ export const useHomePageModel = () => {
   const availableButtons = Object.values(PickerTypeEnum);
 
   const fetchSelector = useCallback((pickerType: PickerTypeEnum | null) => {
-    if (pickerType === PickerTypeEnum.Hour) {
-      return getHourStatistics();
-    }
-
     if (pickerType === PickerTypeEnum.Day) {
       return getDayStatistics();
     }
@@ -44,25 +49,37 @@ export const useHomePageModel = () => {
       return getMonthStatistics();
     }
 
+    if (pickerType === PickerTypeEnum.Year) {
+      return getYearStatistics();
+    }
+
     return null;
   }, []);
 
-  const fetchPriceHistory = useCallback(
+  const fetchData = useCallback(
     async (pickerType: PickerTypeEnum | null) => {
       if (pickerType === null) return;
 
-      setStateData({ loading: true });
+      setStateData({ loading: true, data: [] });
       setCurrentState(State.Loading);
 
       try {
-        const priceHistory = await fetchSelector(pickerType);
+        const fetchedData = await fetchSelector(pickerType);
 
-        if (!priceHistory) return;
+        if (!fetchedData) return;
 
-        setStateData({ loading: false, data: responseAdapter(priceHistory) });
+        setStateData({ loading: false, data: fetchedData });
         setCurrentState(State.Data);
+        xLabelsAdapter(fetchedData, setXLabels);
+        yLabelsAdapter(fetchedData, setYLabels);
       } catch (error) {
-        setStateData({ loading: false, error: new Error('got trouble') });
+        console.log(123);
+
+        setStateData({
+          loading: false,
+          data: [],
+          error: new Error('got trouble'),
+        });
         setCurrentState(State.Error);
       }
     },
@@ -70,8 +87,8 @@ export const useHomePageModel = () => {
   );
 
   useEffect(() => {
-    fetchPriceHistory(pickerType);
-  }, [pickerType, fetchPriceHistory]);
+    fetchData(pickerType);
+  }, [pickerType, fetchData]);
 
   const onChartHover = (
     hoverLocation: number | null,
@@ -92,5 +109,7 @@ export const useHomePageModel = () => {
     currentState,
     stateData,
     availableButtons,
+    xLabels,
+    yLabels,
   };
 };

@@ -18,6 +18,8 @@ export const Home: React.FC = () => {
     currentState,
     stateData,
     availableButtons,
+    xLabels,
+    yLabels,
   } = useHomePageModel();
 
   return (
@@ -55,8 +57,10 @@ export const Home: React.FC = () => {
       <div className={styles.row}>
         <div className={styles.chart}>
           <>
+            {currentState === State.Idle && 'Choose a type above'}
             {currentState === State.Loading && <Loader />}
-            {currentState === State.Data && stateData.data && (
+            {currentState === State.Error && 'Sorry, an error occured'}
+            {currentState === State.Data && stateData.data.length !== 0 && (
               <LineChart
                 fetchedData={stateData.data}
                 svgHeight={SVG_WIDTH}
@@ -66,10 +70,14 @@ export const Home: React.FC = () => {
                 }
                 lineChartRef={lineChartRef}
                 color='#01a4f5'
+                yLabelMin={yLabels?.min}
+                yCenteredLabel={yLabels?.center}
+                yLabelMax={yLabels?.max}
+                xLabelMax={xLabels?.max}
+                xCenteredLabel={xLabels?.center}
+                xLabelMin={xLabels?.min}
               />
             )}
-            {currentState === State.Error && stateData.error}
-            {currentState === State.Idle && 'Choose a type above'}
           </>
         </div>
       </div>

@@ -1,5 +1,5 @@
+import { FIRST_ELEMENT } from 'entities/consts';
 import { Point } from 'entities/Point';
-import { FIRST_ELEMENT } from '../model/consts';
 
 export const getY = (data: Point[]) => {
   return {

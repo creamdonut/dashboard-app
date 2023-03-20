@@ -23,17 +23,23 @@ import { Point } from 'entities/Point';
 
 type Props = {
   fetchedData: Point[];
+  lineChartRef: React.RefObject<SVGSVGElement>;
+  onChartHover: (
+    relativeLoc: number | null,
+    closestPoint: ActivePoint | null
+  ) => void;
   color?: string;
   pointRadius?: number;
   svgHeight?: number;
   svgWidth?: number;
   xLabelSize?: number;
   yLabelSize?: number;
-  lineChartRef: React.RefObject<SVGSVGElement>;
-  onChartHover: (
-    relativeLoc: number | null,
-    closestPoint: ActivePoint | null
-  ) => void;
+  yLabelMax?: string;
+  yCenteredLabel?: string;
+  yLabelMin?: string;
+  xLabelMax?: string;
+  xCenteredLabel?: string;
+  xLabelMin?: string;
 };
 
 export const LineChart: React.FC<Props> = ({
@@ -44,6 +50,12 @@ export const LineChart: React.FC<Props> = ({
   svgWidth = DEFAULT_SVG_WIDTH,
   xLabelSize = DEFAULT_X_LABEL_SIZE,
   yLabelSize = DEFAULT_Y_LABEL_SIZE,
+  yLabelMax,
+  yLabelMin,
+  xLabelMax,
+  xLabelMin,
+  yCenteredLabel,
+  xCenteredLabel,
   lineChartRef,
   onChartHover,
 }) => {
@@ -102,7 +114,12 @@ export const LineChart: React.FC<Props> = ({
             xLabelSize={xLabelSize}
             svgWidth={svgWidth}
             svgHeight={svgHeight}
-            fetchedData={fetchedData}
+            yMaxLabel={yLabelMax}
+            yCenteredLabel={yCenteredLabel}
+            yMinLabel={yLabelMin}
+            xMaxLabel={xLabelMax}
+            xCenteredLabel={xCenteredLabel}
+            xMinLabel={xLabelMin}
           />
           {hoverLocation && (
             <LineChartLine
