@@ -1,21 +1,11 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
-import { ActivePoint } from 'entities/ActivePoint';
+import { useState, useEffect, useCallback } from 'react';
 import {
   getDayStatistics,
   getYearStatistics,
   getMonthStatistics,
   getWeekStatistics,
 } from 'shared/api';
-import { useWindowSize } from 'shared/customHooks/useWindowSize';
 import { PickerTypeEnum, State, StateData } from './types';
-
-import { xLabelsAdapter, yLabelsAdapter } from '../lib/labelsAdapter';
-
-type Labels = {
-  min: string;
-  center: string;
-  max: string;
-};
 
 export const useHomePageModel = () => {
   const [currentState, setCurrentState] = useState<State>(State.Idle);
@@ -23,16 +13,7 @@ export const useHomePageModel = () => {
     loading: false,
     data: [],
   });
-  const [hoverLocation, setHoverLocation] = useState<number | null>(null);
-  const [activePoint, setActivePoint] = useState<ActivePoint | null>(null);
   const [pickerType, setPickerType] = useState<PickerTypeEnum | null>(null);
-
-  const [xLabels, setXLabels] = useState<Labels | null>(null);
-  const [yLabels, setYLabels] = useState<Labels | null>(null);
-
-  const lineChartRef = useRef<SVGSVGElement>(null);
-
-  const [width] = useWindowSize();
 
   const availableButtons = Object.values(PickerTypeEnum);
 
@@ -70,8 +51,6 @@ export const useHomePageModel = () => {
 
         setStateData({ loading: false, data: fetchedData });
         setCurrentState(State.Data);
-        xLabelsAdapter(fetchedData, setXLabels);
-        yLabelsAdapter(fetchedData, setYLabels);
       } catch (error) {
         console.log(123);
 
@@ -90,26 +69,11 @@ export const useHomePageModel = () => {
     fetchData(pickerType);
   }, [pickerType, fetchData]);
 
-  const onChartHover = (
-    hoverLocation: number | null,
-    activePoint: ActivePoint | null
-  ) => {
-    setHoverLocation(hoverLocation);
-    setActivePoint(activePoint);
-  };
-
   return {
-    width,
-    hoverLocation,
-    activePoint,
-    onChartHover,
-    lineChartRef,
     setPickerType,
     pickerType,
     currentState,
     stateData,
     availableButtons,
-    xLabels,
-    yLabels,
   };
 };

@@ -1,3 +1,7 @@
+import { DAY_MOCK } from 'shared/mock/day';
+import { MONTH_MOCK } from 'shared/mock/month';
+import { WEEK_MOCK } from 'shared/mock/week';
+import { YEAR_MOCK } from 'shared/mock/year';
 import { makeRequest } from './makeRequest';
 
 export interface ResponseItem {
@@ -12,7 +16,7 @@ export const getDayStatistics = async () => {
     url: 'day',
   });
 
-  return response;
+  return response || DAY_MOCK;
 };
 
 export const getWeekStatistics = async () => {
@@ -20,7 +24,7 @@ export const getWeekStatistics = async () => {
     url: 'week',
   });
 
-  return response;
+  return response || WEEK_MOCK;
 };
 
 export const getMonthStatistics = async () => {
@@ -28,7 +32,7 @@ export const getMonthStatistics = async () => {
     url: 'month',
   });
 
-  return response;
+  return response || MONTH_MOCK;
 };
 
 export const getYearStatistics = async () => {
@@ -36,5 +40,5 @@ export const getYearStatistics = async () => {
     url: 'year',
   });
 
-  return response;
+  return response || YEAR_MOCK;
 };

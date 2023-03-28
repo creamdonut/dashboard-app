@@ -1,9 +1,11 @@
 import dayjs from 'dayjs';
+
+import { Labels } from '../model';
+
 import { DEFAULT_DATE_FORMAT, FIRST_ELEMENT } from 'entities/consts';
 import { Point } from 'entities/Point';
 import { getLastElementIdx } from 'shared/lib/getLastElementIdx';
 import { getY } from 'shared/LineChart/lib/getY';
-import { Labels } from '../model';
 
 export const xLabelsAdapter = (
   fetchedData: Point[],

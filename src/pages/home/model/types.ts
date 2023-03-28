@@ -26,9 +26,3 @@ export type StateData = {
   data: Point[];
   error?: Error;
 };
-
-export type Labels = {
-  min: string;
-  center: string;
-  max: string;
-};

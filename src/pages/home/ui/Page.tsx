@@ -1,25 +1,17 @@
-import { State, SVG_WIDTH, useHomePageModel } from '../model';
+import { State, useHomePageModel } from '../model';
 
 import styles from './page.module.scss';
 
-import { LineChart } from 'shared/LineChart';
-import { Tooltip } from 'shared/Tooltip';
 import { Loader } from 'shared/Loader';
+import { ViewLineChart } from 'features/ViewLineChart';
 
 export const Home: React.FC = () => {
   const {
-    width,
-    onChartHover,
-    activePoint,
-    hoverLocation,
-    lineChartRef,
     setPickerType,
     pickerType,
     currentState,
     stateData,
     availableButtons,
-    xLabels,
-    yLabels,
   } = useHomePageModel();
 
   return (
@@ -42,18 +34,6 @@ export const Home: React.FC = () => {
           </div>
         </div>
       </div>
-
-      <div className={styles.row}>
-        <div className={styles.popup}>
-          {hoverLocation && activePoint && (
-            <Tooltip
-              hoverLocation={hoverLocation}
-              activePoint={activePoint}
-              lineChartRef={lineChartRef}
-            />
-          )}
-        </div>
-      </div>
       <div className={styles.row}>
         <div className={styles.chart}>
           <>
@@ -61,22 +41,7 @@ export const Home: React.FC = () => {
             {currentState === State.Loading && <Loader />}
             {currentState === State.Error && 'Sorry, an error occured'}
             {currentState === State.Data && stateData.data.length !== 0 && (
-              <LineChart
-                fetchedData={stateData.data}
-                svgHeight={SVG_WIDTH}
-                svgWidth={width}
-                onChartHover={(relativeLocation, activePoint) =>
-                  onChartHover(relativeLocation, activePoint)
-                }
-                lineChartRef={lineChartRef}
-                color='#01a4f5'
-                yLabelMin={yLabels?.min}
-                yCenteredLabel={yLabels?.center}
-                yLabelMax={yLabels?.max}
-                xLabelMax={xLabels?.max}
-                xCenteredLabel={xLabels?.center}
-                xLabelMin={xLabels?.min}
-              />
+              <ViewLineChart fetchedData={stateData.data} />
             )}
           </>
         </div>
